@@ -10,21 +10,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.backend.entity.AdminUser;
-import com.example.backend.repository.AdminUserRepository;
+import com.example.backend.entity.User;
+import com.example.backend.repository.UserRepository;
 
 @Configuration
 public class ApplicationConfiguration {
-    private final AdminUserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public ApplicationConfiguration(AdminUserRepository userRepository) {
+    public ApplicationConfiguration(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            AdminUser user = userRepository.findByEmail(username);
+            User user = userRepository.findByEmail(username);
             if (user == null) {
                 throw new UsernameNotFoundException("User not found");
             }
