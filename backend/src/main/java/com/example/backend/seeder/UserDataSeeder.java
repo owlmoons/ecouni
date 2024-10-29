@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.example.backend.entity.User;
@@ -22,16 +21,15 @@ public class UserDataSeeder {
     private static final Logger logger = LoggerFactory.getLogger(UserDataSeeder.class);
 
     @Bean
-    CommandLineRunner seedUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    CommandLineRunner seedUsers(UserRepository userRepository) {
         return args -> {
             if (userRepository.count() == 0) { // Prevent duplicate entries
 
-                // Create an employee user
+                // Create an user
                 User user = new User();
                 user.setUserId(GenerateUtils.generateUUID());
                 user.setUserName("nguyenvana");
-                user.setEmail("nguyenvana@gmail.com");
-                user.setHashPassword(passwordEncoder.encode("Abc12356@!")); 
+                user.setEmail("huyng.1801@gmail.com");
                 user.setIsActive(true);
                 user.setCreatedAt(new Date());
                 user.setUpdatedAt(new Date());
